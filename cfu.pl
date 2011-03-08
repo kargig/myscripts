@@ -22,7 +22,7 @@ $ua->max_size('200000');
 my $req = HTTP::Request->new( GET => "$url" );
 my $result= $ua->request($req);
 if ($result->is_success) {
-	$doc = $result->content();
+    $doc = $result->content();
 }
 else { print "FAIL!";}
 
@@ -35,8 +35,8 @@ my $size = @CF;
 my $count=0;
 for(my $i = 0; $i < $size; $i++){
         if ($CF[$i] =~ /<div class=\"command\">/ && ($multiple == 1 || $count < 2)) {
-		    $CF[$i] =~ s/.*<div class=\"command\">(.*)<\/div>/$1/gm;
-	    	$CF[$i] = decode_entities($CF[$i]);
+            $CF[$i] =~ s/.*<div class=\"command\">(.*)<\/div>/$1/gm;
+            $CF[$i] = decode_entities($CF[$i]);
             $count++;
             if ($multiple ==1 || $count < 2) {
                 print "CMD: $CF[$i]";
@@ -52,7 +52,7 @@ for(my $i = 0; $i < $size; $i++){
             }
         }
         if ($CF[$i] =~ /<div class=\"summary\">/ && ($multiple == 1 || $count < 2)) {
-		    $CF[$i+1] =~ s/\s+(.*)<\/div>/$1/gm;
+            $CF[$i+1] =~ s/\s+(.*)<\/div>/$1/gm;
             $CF[$i+1] =~ s/.*<a href=\"(.*)\" title=\".*\">(.*)<\/a>/URL=http:\/\/www.commandlinefu.com$1  Title=$2/g;
             $CF[$i+1] = decode_entities($CF[$i+1]);
             print "Summary: $CF[$i+1]";
